@@ -40,8 +40,8 @@ $data = $d->getByid($_GET['id']);
                             <label for="inputSauce">Saus</label>
                                 <select id="inputSauce" class="form-control" placeholder="test" name="sauce">
                                     <option disbaled>Maak je keuze</option>
-                                    <option>>Extra tomatensaus</option>
-                                    <option> Spicy tomatensaus</option>
+                                    <option>Extra tomatensaus</option>
+                                    <option>Spicy tomatensaus</option>
                                     <option>BBQ saus</option>
                                     <option>Creme fraiche</option>
                             </select>

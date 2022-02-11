@@ -31,46 +31,45 @@ class Data extends Database {
     }
 
     public function updateById(string $id) {
-        $this->prepare("UPDATE pizza SET bodemformaat = :size, saus = :sauce, toppings = :toppings, peterselie = :peterselie, oregano = :oregano, chili = :chili, peper = :peper WHERE id = :id");
+        $this->checkHerbs();
 
-        $peterselie = isset($this->data['peterselie']) ? true : false;
-        $oregano = isset($this->data['oregano']) ? true : false;
-        $chili = isset($this->data['chili']) ? true : false;
-        $peper = isset($this->data['peper']) ? true : false;
-        
+        $this->prepare("UPDATE pizza SET bodemformaat = :size, saus = :sauce, toppings = :toppings, peterselie = :peterselie, oregano = :oregano, chili = :chili, peper = :peper WHERE id = :id");        
         $this->bind(":id", intval($id));
         $this->bind(":size", $this->data['size']);
         $this->bind(":sauce", $this->data['sauce']);
         $this->bind(":toppings", $this->data['topping']);
-        $this->bind(":peterselie", $peterselie);
-        $this->bind(":oregano", $oregano);
-        $this->bind(":chili", $chili);
-        $this->bind(":peper", $peper);
+        $this->bind(":peterselie", $this->peterselie);
+        $this->bind(":oregano", $this->oregano);
+        $this->bind(":chili", $this->chili);
+        $this->bind(":peper", $this->peper);
         $this->execute();
     }
 
     public function addEntry() {
+        $this->checkHerbs();
+
         if(is_null($this->data) || empty($this->data)) {
             return false;
         }
-
-        $peterselie = isset($this->data['peterselie']) ? true : false;
-        $oregano = isset($this->data['oregano']) ? true : false;
-        $chili = isset($this->data['chili']) ? true : false;
-        $peper = isset($this->data['peper']) ? true : false;
     
         $this->prepare("INSERT INTO pizza (bodemformaat, saus, toppings, peterselie, oregano, chili, peper)
          VALUES (:bodemformaat, :saus, :toppings, :peterselie, :oregano, :chili, :peper)");
         $this->bind(":bodemformaat", intval($this->data['size']));
         $this->bind(":saus", $this->data['sauce']);
         $this->bind(":toppings", $this->data['topping']);
-        $this->bind(":peterselie", $peterselie);
-        $this->bind(":oregano", $oregano);
-        $this->bind(":chili", $chili);
-        $this->bind(":peper", $peper);
+        $this->bind(":peterselie", $this->peterselie);
+        $this->bind(":oregano", $this->oregano);
+        $this->bind(":chili", $this->chili);
+        $this->bind(":peper", $this->peper);
         $this->execute();
     }
 
+    private function checkHerbs() {
+        $this->peterselie = isset($this->data['peterselie']) ? true : false;
+        $this->oregano = isset($this->data['oregano']) ? true : false;
+        $this->chili = isset($this->data['chili']) ? true : false;
+        $this->peper = isset($this->data['peper']) ? true : false;
+    }
 }
 
 ?>

@@ -39,8 +39,8 @@ class Data extends Database {
         $peper = isset($this->data['peper']) ? true : false;
         
         $this->bind(":id", intval($id));
-        $this->bind(":bodemformaat", intval($this->data['size']));
-        $this->bind(":saus", $this->data['sauce']);
+        $this->bind(":size", $this->data['size']);
+        $this->bind(":sauce", $this->data['sauce']);
         $this->bind(":toppings", $this->data['topping']);
         $this->bind(":peterselie", $peterselie);
         $this->bind(":oregano", $oregano);

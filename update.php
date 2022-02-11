@@ -2,7 +2,6 @@
 require "models/data.php";
 $d = new Data();
 $data = $d->getByid($_GET['id']);
-var_dump($data);
 ?>
 
 <!doctype html>
